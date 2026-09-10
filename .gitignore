@@ -1,0 +1,15 @@
+.venv/
+*.egg-info/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.env
+.env.*
+*.log
+build/
+dist/
+benchmark_results/
+credentials.env
+/dev/
+/benchmarks/work/

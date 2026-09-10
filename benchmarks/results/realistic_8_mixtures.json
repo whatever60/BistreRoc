@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-10T05:03:53Z",
+  "fixture": {
+    "schema_version": 1,
+    "prepared_at_utc": "2026-09-09T21:43:33Z",
+    "scenario": {
+      "name": "realistic_sparse_reference_8_mixtures_g14",
+      "reference_gene_count": 16105,
+      "reference_cell_count": 28326,
+      "cell_type_count": 76,
+      "reference_nonzero_count": 30564848,
+      "reference_density": 0.06700022488425497,
+      "mixture_gene_count": 16105,
+      "mixture_count": 8,
+      "markers_per_cell_type": 14,
+      "q_value_threshold": 0.01,
+      "expected_signature_scale": "approximately 500 unique genes"
+    },
+    "sources": {
+      "reference": {
+        "filename": "refsample.tsv",
+        "bytes": 914675427,
+        "sha256": "243496a6b3a84a6c593428bb83ad657649f3a944e9986dd036cf04e098b517ef"
+      },
+      "mixture": {
+        "filename": "simulated_bulk_search.tsv",
+        "bytes": 16105808,
+        "sha256": "6944bc8715d3b899dc29055df459dbcf4aa1281dacdc1a22743c9e26adb5c549"
+      }
+    },
+    "representations": {
+      "reference": {
+        "reference_bytes": 914675427,
+        "bistreroc_bytes": 45897489
+      },
+      "mixture": {
+        "reference_bytes": 2668177,
+        "bistreroc_bytes": 1141192
+      }
+    },
+    "timing_boundary": "input conversion is preparation and is excluded from timed stages"
+  },
+  "improvement_matrix": {
+    "signature_generation": {
+      "faster": 9.110720584183914,
+      "less_peak_memory": 16.291073960572657,
+      "less_input_disk": 19.928659430584535,
+      "less_output_disk": 862.9457430093815
+    },
+    "fraction_estimation": {
+      "faster": 5.339692922584446,
+      "less_peak_memory": 2.3533180851404936,
+      "less_input_disk": 2.6443324099218137,
+      "less_output_disk": 3.1530289330922243
+    },
+    "end_to_end": {
+      "faster": 8.670494607691076,
+      "less_peak_memory": 15.227034190866048,
+      "less_input_disk": 19.501898958433806,
+      "less_output_disk": 841.8242747989872
+    }
+  },
+  "matrix_rows": [
+    "signature_generation",
+    "fraction_estimation",
+    "end_to_end"
+  ],
+  "matrix_columns": [
+    "faster",
+    "less_peak_memory",
+    "less_input_disk",
+    "less_output_disk"
+  ],
+  "numerical_equivalence": {
+    "relative_tolerance": 5e-14,
+    "absolute_tolerance": 1e-12,
+    "maximum_absolute_difference": {
+      "signature_generation": 2.6775524020195007e-09,
+      "fraction_estimation": 2.7140074042308893e-14
+    }
+  },
+  "raw": {
+    "bistreroc": {
+      "schema_version": 1,
+      "implementation": "bistreroc",
+      "recorded_at_utc": "2026-09-10T05:03:45Z",
+      "software": {
+        "name": "BistreRoc",
+        "version": "0.1.0",
+        "python": "3.13.5",
+        "numpy": "2.5.2",
+        "statistical_runtime": {
+          "r": "4.4.3",
+          "data.table": "1.17.8",
+          "e1071": "1.7.17"
+        }
+      },
+      "configuration": {
+        "cores": 8,
+        "markers_per_cell_type": 14,
+        "q_value_threshold": 0.01,
+        "memory_sampling_interval_seconds": 0.02,
+        "arguments_without_environment_paths": {
+          "signature_generation": [
+            "build-signature",
+            "--reference",
+            "<sparse-reference-bundle>",
+            "--output",
+            "<compressed-signature>",
+            "--minimum-markers-per-cell-type",
+            "14",
+            "--maximum-markers-per-cell-type",
+            "14",
+            "--q-value-threshold",
+            "0.01",
+            "--cores",
+            "8"
+          ],
+          "fraction_estimation": [
+            "deconvolve",
+            "--mixture",
+            "<compressed-mixture>",
+            "--signature",
+            "<compressed-signature>",
+            "--output",
+            "<compressed-fractions>",
+            "--cores",
+            "8"
+          ]
+        }
+      },
+      "host": {
+        "system": "Linux",
+        "kernel": "6.8.0-1061-aws",
+        "machine": "x86_64",
+        "cpu_model": "AMD EPYC 7R13 Processor",
+        "logical_cpus": 16,
+        "available_cpus": 16
+      },
+      "stages": {
+        "signature_generation": {
+          "wall_seconds": 58.90108946803957,
+          "peak_memory_bytes": 716406784,
+          "input_bytes": 45897489,
+          "output_bytes": 175664,
+          "primary_output": "runs/bistreroc/signature_generation/signature.tsv.xz",
+          "primary_output_bytes": 175664,
+          "primary_output_sha256": "c19e9572407d4acc2c2e43026be3fe37072a3971191cd69add6a1849f84cfdaa",
+          "primary_output_rows": 524,
+          "primary_output_numeric_columns": 76
+        },
+        "fraction_estimation": {
+          "wall_seconds": 7.784849438350648,
+          "peak_memory_bytes": 766468096,
+          "input_bytes": 1316856,
+          "output_bytes": 4424,
+          "primary_output": "runs/bistreroc/fraction_estimation/fractions.tsv.xz",
+          "primary_output_bytes": 4424,
+          "primary_output_sha256": "8cb0aab2519fa819c4e6000ca1940f702df5021d97380c9ac70843e2e9841de6",
+          "primary_output_rows": 8,
+          "primary_output_numeric_columns": 79
+        },
+        "end_to_end": {
+          "wall_seconds": 66.68593890639022,
+          "peak_memory_bytes": 766468096,
+          "input_bytes": 47038681,
+          "output_bytes": 180088,
+          "derivation": "sum of sequential wall time; maximum stage peak memory"
+        }
+      }
+    },
+    "reference": {
+      "schema_version": 1,
+      "implementation": "reference",
+      "recorded_at_utc": "2026-09-10T04:41:42Z",
+      "software": {
+        "name": "CIBERSORTx",
+        "image": "docker.io/cibersortx/fractions@sha256:9dc06b0a3f58d12a81cc962c9d2147b2b5edb6743f44dc2ac6d3f59fe7418edc",
+        "statistical_runtime": {
+          "r": "3.6.3",
+          "data.table": "1.12.8",
+          "e1071": "1.7.3"
+        }
+      },
+      "configuration": {
+        "worker_limit": 3,
+        "markers_per_cell_type": 14,
+        "q_value_threshold": 0.01,
+        "memory_sampling_interval_seconds": 0.02,
+        "arguments_without_credentials": {
+          "signature_generation": [
+            "--single_cell",
+            "TRUE",
+            "--refsample",
+            "reference.tsv",
+            "--sampling",
+            "1",
+            "--fraction",
+            "0",
+            "--G.min",
+            "14",
+            "--G.max",
+            "14"
+          ],
+          "fraction_estimation": [
+            "--mixture",
+            "mixture.tsv",
+            "--sigmatrix",
+            "signature.tsv"
+          ]
+        }
+      },
+      "host": {
+        "system": "Linux",
+        "kernel": "6.8.0-1061-aws",
+        "machine": "x86_64",
+        "cpu_model": "AMD EPYC 7R13 Processor",
+        "logical_cpus": 16,
+        "available_cpus": 16
+      },
+      "stages": {
+        "signature_generation": {
+          "wall_seconds": 536.6313682473265,
+          "peak_memory_bytes": 11671035904,
+          "input_bytes": 914675427,
+          "output_bytes": 151588501,
+          "primary_output": "runs/reference/signature_generation/CIBERSORTx_reference_inferred_phenoclasses.CIBERSORTx_reference_inferred_refsample.bm.K999.txt",
+          "primary_output_bytes": 814028,
+          "primary_output_sha256": "6227d7a70ee480c823e1e007537d7c5c9b7bbcef347ebd91b99f7a2f44dcb4e6",
+          "primary_output_rows": 524,
+          "primary_output_numeric_columns": 76
+        },
+        "fraction_estimation": {
+          "wall_seconds": 41.56870544934645,
+          "peak_memory_bytes": 1803743232,
+          "input_bytes": 3482205,
+          "output_bytes": 13949,
+          "primary_output": "runs/reference/fraction_estimation/CIBERSORTx_Results.txt",
+          "primary_output_bytes": 13949,
+          "primary_output_sha256": "25b8136065b80ef4d83dfe90db050e8e5c78b5a693c51433a26800fa3baab662",
+          "primary_output_rows": 8,
+          "primary_output_numeric_columns": 79
+        },
+        "end_to_end": {
+          "wall_seconds": 578.2000736966729,
+          "peak_memory_bytes": 11671035904,
+          "input_bytes": 917343604,
+          "output_bytes": 151602450,
+          "derivation": "sum of sequential wall time; maximum stage peak memory"
+        }
+      }
+    }
+  }
+}
